@@ -1,0 +1,17 @@
+/bin/
+/server
+.env
+command.md
+KUBERNETES.md
+k8s/base/app/secret.yaml
+gitlab-registry-secret.yaml
+
+# OS / editor junk
+.DS_Store
+.idea/
+.vscode/
+*.swp
+
+# Go build/test artifacts
+*.out
+*.test
