@@ -1,0 +1,12 @@
+# Корневой Kustomize: собирает namespace, base/ (app+postgres+redis+netpol+rbac),
+# ingress и лимиты namespace-а в один apply.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - namespace.yaml
+  - base
+  - ingress.yaml
+  - limit-range.yaml
+  - resource-quota.yaml
+  - gitlab-registry-secret.yaml

@@ -1,0 +1,28 @@
+# Собирает все ресурсы приложения: backend, postgres, redis, network policy, rbac.
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - app/configmap.yaml
+  - app/secret.yaml
+  - app/deployment.yaml
+  - app/service.yaml
+  - app/hpa-backend.yaml
+  - app/pdb-backend.yaml
+  - app/job-backend-migrate.yaml
+
+  - netpol/deny-all.yaml
+  - netpol/backend-ingress-netpol.yaml
+  - netpol/backend-egress-netpol.yaml
+  - netpol/postgres-netpol.yaml
+  - netpol/redis-netpol.yaml
+
+  - postgres/statefulset-postgres.yaml
+  - postgres/service-postgres.yaml
+
+  - redis/deployment-redis.yaml
+  - redis/service-redis.yaml
+
+  - rbac/service-account.yaml
+  - rbac/role.yaml
+  - rbac/role-binding.yaml

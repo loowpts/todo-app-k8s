@@ -1,0 +1,21 @@
+# LimitRange: дефолтные request/limit для контейнеров без своих resources.
+apiVersion: v1
+kind: LimitRange
+metadata:
+  name: todo-app-limits
+  namespace: todo-app
+spec:
+  limits:
+    - type: Container
+      default:
+        memory: "128Mi"
+        cpu: "200m"
+      defaultRequest:
+        memory: "64Mi"
+        cpu: "100m"
+      max:
+        memory: "512Mi"
+        cpu: "500m"
+      min:
+        memory: "32Mi"
+        cpu: "50m"

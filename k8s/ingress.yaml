@@ -1,0 +1,20 @@
+# Ingress: пускает внешний HTTP-трафик на backend-service (nginx-ingress).
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: todo-app-ingress
+  namespace: todo-app
+
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: todo-app.loowpts.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service
+                port:
+                  number: 8080

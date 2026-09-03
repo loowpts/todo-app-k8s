@@ -1,0 +1,13 @@
+# ResourceQuota: общий потолок cpu/memory/подов на весь namespace.
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: todo-app-quota
+  namespace: todo-app
+spec:
+  hard:
+    requests.cpu: "2"
+    requests.memory: "1Gi"
+    limits.cpu: "4"
+    limits.memory: "2Gi"
+    pods: "20"
