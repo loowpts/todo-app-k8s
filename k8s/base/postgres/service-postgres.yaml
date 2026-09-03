@@ -1,0 +1,13 @@
+# Service: headless (clusterIP: None) для стабильного DNS-имени пода StatefulSet.
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres-service
+  namespace: todo-app
+spec:
+  clusterIP: None
+  selector:
+    app: postgres
+  ports:
+    - port: 5432
+      targetPort: 5432
