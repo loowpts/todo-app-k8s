@@ -1,0 +1,11 @@
+# PDB: при добровольных disruption (drain, upgrade) держит минимум 1 под backend живым.
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: backend-pdb
+  namespace: todo-app
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: backend

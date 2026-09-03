@@ -1,0 +1,13 @@
+# ConfigMap: несекретные настройки backend (адреса, таймауты, лимиты).
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-configmap
+  namespace: todo-app
+data:
+  DB_HOST: "postgres-headless"
+  DB_PORT: "5432"
+
+  CACHE_TTL_SECONDS: "10"
+  RATE_LIMIT_RPM: "120"
+  SHUTDOWN_TIMEOUT_SECONDS: "15"

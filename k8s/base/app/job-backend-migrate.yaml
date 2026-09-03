@@ -1,0 +1,42 @@
+# Job: разово применяет SQL-миграции (--migrate-only) и завершается.
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: backend-migrate
+  namespace: todo-app
+spec:
+  backoffLimit: 2
+  ttlSecondsAfterFinished: 300
+  template:
+    metadata:
+      labels:
+        app: backend
+    spec:
+      securityContext:
+        runAsNonRoot: true
+      imagePullSecrets:
+        - name: gitlab-registry-secret
+      restartPolicy: Never
+      containers:
+        - name: migrate
+          image: 192.168.0.21:5050/loowpts/todo-app/backend:v1.1.0
+          args: ["--migrate-only"]
+          envFrom:
+            - configMapRef:
+                name: app-configmap
+            - secretRef:
+                name: app-secret
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop: ["ALL"]
+            seccompProfile:
+              type: RuntimeDefault
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "250m"
