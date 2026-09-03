@@ -1,0 +1,11 @@
+# NetworkPolicy: базовый deny-all для namespace — весь трафик закрыт, пока не разрешён явно.
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: todo-app
+spec:
+  podSelector: {}
+  policyTypes:
+    - Ingress
+    - Egress
